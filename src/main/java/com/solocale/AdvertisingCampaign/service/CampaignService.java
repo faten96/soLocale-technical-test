@@ -8,7 +8,7 @@ public interface CampaignService {
 
     CampaignDTO createCampaign(CampaignDTO campaign);
 
-    List<CampaignDTO> getAllCampaigns();
+    List<CampaignDTO> fetchAllCampaigns();
 
     CampaignDTO getCampaignById(Long id);
 
@@ -16,6 +16,5 @@ public interface CampaignService {
 
     void deleteCampaign(Long id);
 
-    // Optional async requirement
     void incrementImpression(Long id);
 }

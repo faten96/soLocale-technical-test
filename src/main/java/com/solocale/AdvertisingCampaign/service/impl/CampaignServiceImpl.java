@@ -2,6 +2,7 @@ package com.solocale.AdvertisingCampaign.service.impl;
 
 import com.solocale.AdvertisingCampaign.dto.CampaignDTO;
 import com.solocale.AdvertisingCampaign.entity.Campaign;
+import com.solocale.AdvertisingCampaign.event.CampaignImpressionProducer;
 import com.solocale.AdvertisingCampaign.mapper.CampaignMapper;
 import com.solocale.AdvertisingCampaign.repository.CampaignRepository;
 import com.solocale.AdvertisingCampaign.service.CampaignService;
@@ -17,6 +18,7 @@ public class CampaignServiceImpl implements CampaignService {
 
     private final CampaignRepository campaignRepository;
     private final CampaignMapper campaignMapper;
+    private final CampaignImpressionProducer producer;
 
     @Override
     public CampaignDTO createCampaign(CampaignDTO campaignDto) {
@@ -26,7 +28,7 @@ public class CampaignServiceImpl implements CampaignService {
     }
 
     @Override
-    public List<CampaignDTO> getAllCampaigns() {
+    public List<CampaignDTO> fetchAllCampaigns() {
         return campaignMapper.toDto(campaignRepository.findAll());
     }
 
@@ -49,6 +51,6 @@ public class CampaignServiceImpl implements CampaignService {
 
     @Override
     public void incrementImpression(Long id) {
-
+        producer.sendImpressionEvent(id);
     }
 }
