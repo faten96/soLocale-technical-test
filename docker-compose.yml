@@ -1,6 +1,5 @@
 version: '3.8'
 services:
-
   zookeeper:
     image: confluentinc/cp-zookeeper:7.6.0
     container_name: zookeeper
@@ -18,7 +17,9 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      # 👇 Key line: advertise hostname inside Docker network
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
@@ -26,7 +27,7 @@ services:
       - zookeeper
 
   postgres:
-    image: postgres:15
+    image: postgres:14.1
     container_name: postgres
     environment:
       POSTGRES_USER: user
@@ -36,3 +37,25 @@ services:
       - "5432:5432"
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U user -d advertising" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  advertising-app:
+    build: .
+    container_name: advertising-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/advertising
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+    depends_on:
+      kafka:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+

@@ -31,3 +31,17 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Ignore local database data directories
+postgres-data/
+pgdata/
+data/
+*.db
+
+# IntelliJ / IDEA files
+.idea/
+*.iml
+
+# Build and logs
+target/
+logs/
