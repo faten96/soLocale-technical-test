@@ -14,9 +14,11 @@ It uses PostgreSQL for persistence, Kafka for events, and Flyway for database mi
 **Run Locally with Docker Compose**
 
 1️⃣ Build the JAR
+
 mvn clean package -DskipTests
 
 2️⃣ Start all services
+
 docker compose up --build
 
 
