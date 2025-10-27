@@ -44,6 +44,6 @@ public class CampaignControllerImpl implements CampaignController {
     @Override
     public ResponseEntity<String> incrementImpression(Long id) {
         campaignService.incrementImpression(id);
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok("Impression Count incremented Successfully !");
     }
 }
