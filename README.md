@@ -1,55 +1,45 @@
-🧠 Advertising Campaign API
+**Advertising Campaign Service**
 
-A Spring Boot 3 + Java 21 REST API to manage advertising campaigns and handle high-concurrency impression updates asynchronously using Kafka.
+A Spring Boot microservice to manage advertising campaigns — create, update, track impressions, and delete campaigns.
+It uses PostgreSQL for persistence, Kafka for events, and Flyway for database migrations.
 
-⚙️ Tech Stack
+**Tech Stack**
 
-Java 21, Spring Boot 3 (Web MVC)
+- Java 21 · Spring Boot 3
+- PostgreSQL · Flyway
+- Apache Kafka
+- Docker & Docker Compose
+- Maven · JUnit 5
 
-PostgreSQL / H2 (Flyway migrations)
+**Run Locally with Docker Compose**
 
-Kafka (Publisher/Subscriber for async updates)
+1️⃣ Build the JAR
 
-MapStruct, Lombok, Maven
+mvn clean package -DskipTests
 
-Swagger (API docs)
+2️⃣ Start all services
 
-📦 Features
-
-CRUD Endpoints: /api/campaigns
-
-Async Impression Update:
-POST /api/campaigns/{id}/impression → increments impressions & updates cost via Kafka
-
-🧩 Run with Docker
 docker compose up --build
 
 
-Services:
+Services started:
 
-Zookeeper
+1. Service	Port
+2. App (API)	8080
+3. PostgreSQL	5432
+4. Kafka	9092
 
-Kafka
+3️⃣ Access
 
-PostgreSQL
+API: http://localhost:8080
 
-Advertising API (on http://localhost:8080/swagger-ui.html
-)
+Swagger: http://localhost:8080/swagger-ui/index.html
 
-🧰 Run Locally
-./mvnw spring-boot:run
+**Run Tests**
+mvn test
 
-
-(Default: H2 in-memory database, Kafka on localhost:9092)
-
-🧾 Example Request
-POST /api/campaigns
-{
-"name": "Black Friday",
-"targetImpression": 100000,
-"targetBudget": 5000,
-"cpm": 2.5
-}
+**Stop & Clean**
+docker compose down -v
 
 👩‍💻 Author
 
