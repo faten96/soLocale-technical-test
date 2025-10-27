@@ -18,9 +18,9 @@ public class CalculatorControllerImpl implements CalculatorController {
             double result = calculatorService.evaluate(expression);
             return ResponseEntity.ok(String.valueOf(result));
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body("❌ Invalid expression: " + e.getMessage());
+            return ResponseEntity.badRequest().body("Invalid expression: " + e.getMessage());
         } catch (ArithmeticException e) {
-            return ResponseEntity.badRequest().body("❌ Math error: " + e.getMessage());
+            return ResponseEntity.badRequest().body("Math error: " + e.getMessage());
         }
     }
 }

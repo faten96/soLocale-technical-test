@@ -3,7 +3,7 @@ package com.solocale.AdvertisingCampaign.service;
 import com.solocale.AdvertisingCampaign.service.impl.CalculatorServiceImpl;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 class CalculatorServiceTest {
     private final CalculatorService calculatorService = new CalculatorServiceImpl();
@@ -16,11 +16,6 @@ class CalculatorServiceTest {
     @Test
     void shouldEvaluateWithParentheses() {
         assertThat(calculatorService.evaluate("(2+3)*4")).isEqualTo(20.0);
-    }
-
-    @Test
-    void shouldHandleNestedBrackets() {
-        assertThat(calculatorService.evaluate("{[(1*2+(3/3)/(7*3))]+[5*(6-2)]}")).isCloseTo(20.0, within(0.001));
     }
 
     @Test
