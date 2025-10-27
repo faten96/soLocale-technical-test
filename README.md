@@ -106,5 +106,7 @@ mvn test
 ```
 
 
+👩‍💻 Author
 
-
+Faten MAALEM — Backend Developer
+(Spring Boot • Kafka • PostgreSQL • Clean Architecture)

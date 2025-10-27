@@ -1,13 +1,13 @@
-package com.solocale.AdvertisingCompagn;
+package com.solocale.AdvertisingCampaign;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AdvertisingCompagnApplication {
+public class AdvertisingCampaignApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AdvertisingCompagnApplication.class, args);
+		SpringApplication.run(AdvertisingCampaignApplication.class, args);
 	}
 
 }
